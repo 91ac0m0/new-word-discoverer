@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "New Words Discoverer",
+  "description": "discover new words in web pages",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "src/assets/fox.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+
+  "background": {
+    "service_worker": "src/scripts/service_worker.ts",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "js": [
+        "src/scripts/content_script.ts"
+      ],
+      "matches": ["<all_urls>"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [ "src/assets/eng_dict.txt", "src/assets/eng_idioms.txt" ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
