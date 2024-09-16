@@ -16,6 +16,8 @@ export interface config {
     };
 
     show_rank: number,
+
+    lang: string,
 }
 
 
@@ -38,6 +40,7 @@ const default_config: config = {
         }
     },
 
+    lang: "zh",
     show_rank: 10,
 }
 

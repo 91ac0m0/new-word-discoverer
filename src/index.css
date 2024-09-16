@@ -562,12 +562,8 @@ video {
   position: relative;
 }
 
-.left-0 {
-  left: 0px;
-}
-
-.top-0 {
-  top: 0px;
+.-left-4 {
+  left: -1rem;
 }
 
 .z-50 {
@@ -586,12 +582,12 @@ video {
   display: flex;
 }
 
-.h-1\/2 {
-  height: 50%;
+.aspect-auto {
+  aspect-ratio: auto;
 }
 
-.h-32 {
-  height: 8rem;
+.h-1\/2 {
+  height: 50%;
 }
 
 .h-full {
@@ -606,8 +602,8 @@ video {
   width: 75%;
 }
 
-.w-64 {
-  width: 16rem;
+.min-w-48 {
+  min-width: 12rem;
 }
 
 .transform {
@@ -626,6 +622,10 @@ video {
   justify-content: center;
 }
 
+.overflow-visible {
+  overflow: visible;
+}
+
 .rounded-l-xl {
   border-top-left-radius: 0.75rem;
   border-bottom-left-radius: 0.75rem;
@@ -639,26 +639,26 @@ video {
   border-top-right-radius: 0.75rem;
 }
 
-.border-2 {
-  border-width: 2px;
+.border {
+  border-width: 1px;
 }
 
-.border-x-2 {
-  border-left-width: 2px;
-  border-right-width: 2px;
+.border-x {
+  border-left-width: 1px;
+  border-right-width: 1px;
 }
 
-.border-y-2 {
-  border-top-width: 2px;
-  border-bottom-width: 2px;
+.border-y {
+  border-top-width: 1px;
+  border-bottom-width: 1px;
 }
 
-.border-b-2 {
-  border-bottom-width: 2px;
+.border-b {
+  border-bottom-width: 1px;
 }
 
-.border-l-2 {
-  border-left-width: 2px;
+.border-l {
+  border-left-width: 1px;
 }
 
 .border-slate-600 {
@@ -680,8 +680,17 @@ video {
   --tw-bg-opacity: 0.6;
 }
 
-.p-3 {
-  padding: 0.75rem;
+.p-2 {
+  padding: 0.5rem;
+}
+
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .text-sm {
@@ -689,23 +698,22 @@ video {
   line-height: 1.25rem;
 }
 
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
 .font-bold {
   font-weight: 700;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.text-amber-500 {
+  --tw-text-opacity: 1;
+  color: rgb(245 158 11 / var(--tw-text-opacity));
 }
 
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.text-orange-300 {
-  --tw-text-opacity: 1;
-  color: rgb(253 186 116 / var(--tw-text-opacity));
 }
 
 .text-slate-500 {
@@ -755,4 +763,16 @@ video {
 
 .hover\:bg-opacity-70:hover {
   --tw-bg-opacity: 0.7;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark\:bg-sky-950 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(8 47 73 / var(--tw-bg-opacity));
+  }
+
+  .dark\:text-slate-50 {
+    --tw-text-opacity: 1;
+    color: rgb(248 250 252 / var(--tw-text-opacity));
+  }
 }

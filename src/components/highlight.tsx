@@ -1,7 +1,8 @@
 import { createPortal } from "react-dom";
 import { style } from "../scripts/config";
-import {Highlight_color} from "./bubble"
-// TODO insert before element
+import React, { useState, useRef, useEffect } from 'react';
+import { Bubble } from "./bubble";
+
 
 export function highlight_node(node: Node, tokens: string[], highlight_style: style) {
     const parent_node = node.parentElement;
@@ -22,48 +23,58 @@ export function highlight_node(node: Node, tokens: string[], highlight_style: st
         .split(regex)
         .filter(part => part !== '');
 
-    let el;
-    if (highlight_style.underline) {
-        console.log("underline");
-        el = (<>{parts.map((part, index) =>
+    let el= (<>{parts.map((part, index) =>
             tokens.includes(part.toLocaleLowerCase())? 
-            (<Highlight_underline key={index} part={part}></Highlight_underline>)
+            (<Highlight_word key={index} part={part} style={highlight_style}></Highlight_word>)
             :
             part
             )}</>);
-    } else if (highlight_style.background) {
-        console.log("background");
-        el = (<>{parts.map((part, index) =>
-            tokens.includes(part.toLocaleLowerCase())? 
-            (<Highlight_background key={index} part={part}></Highlight_background>)
-            :
-            part
-            )}</>);
-    } else {
-        console.log("color");
-        el = (<>{parts.map((part, index) =>
-            tokens.includes(part.toLocaleLowerCase())? 
-            (<Highlight_color key={index} part={part}></Highlight_color>)
-            :
-            part
-            )}</>);
-    }
-
     let new_empty_element = document.createElement('span');
     node.parentElement.insertBefore(new_empty_element, node);
     return createPortal(el, new_empty_element);
 }
 
-function Highlight_background({part}: {part:string}) {
-    return <span className="bg-orange-200">{part}</span>
+interface PopupButtonProps {
+    part: string;
+    style: style;
 }
 
+const Highlight_word: React.FC<PopupButtonProps> = ({ part, style }) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const popupRef = useRef<HTMLDivElement | null>(null);
 
-// function Highlight_color({part}: {part:string}) {
-//     return <span className="text-orange-300">{part}</span>
+    let style_class;
+    if(style.background) {
+        style_class = "bg-orange-200";
+    } else if (style.underline) {
+        style_class = "underline decoration-orange-100";
+    } else {
+        style_class = "text-amber-500";
+    }
 
-// }
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+        if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+            setIsOpen(false);
+        }
+        };
 
-function Highlight_underline({part}: {part:string}) {
-    return <span className="underline decoration-orange-100">{part}</span>
-}
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    return (
+        <span className="relative">
+        <span className={style_class} onClick={() => setIsOpen(!isOpen)} >{part}</span>
+        {isOpen && (
+            <div
+            ref={popupRef}
+            className="z-50 absolute -left-4 -button-2 mt-2 transform transition-all duration-300 ease-in-out"
+            ><Bubble word={part.toLocaleLowerCase()} is_open={isOpen}></Bubble>
+            </div>
+        )}
+        </span>
+    );
+};

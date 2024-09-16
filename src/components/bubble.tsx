@@ -1,57 +1,39 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useEffect, useState } from "react";
 
-interface PopupButtonProps {
-  part: string;
+async function translation(word: string) {
+  const response = await chrome.runtime.sendMessage({query: 'google_translate', word: word});
+  const translation = response.translate === "" ? "no result" : response.translate;
+  return translation;
 }
 
-export const Highlight_color: React.FC<PopupButtonProps> = ({ part }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const popupRef = useRef<HTMLDivElement | null>(null);
+export const Bubble = ({ word, is_open }: {word: string, is_open: boolean}) => {
+  const [translationData, setTranslationData] = useState(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
+    const fetchTranslation = async () => {
+      const data = await translation(word);
+      setTranslationData(data);
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+    fetchTranslation();
+  }, [is_open]);
+
+  if (!translationData) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <span className="relative">
-      <span className="bg-orange-200" onClick={() => setIsOpen(!isOpen)} >{part}</span>
-      {isOpen && (
-        <div
-          ref={popupRef}
-          className="z-50 absolute top-0 left-0 mt-2 transform transition-all duration-300 ease-in-out"
-        ><Bubble></Bubble>
-        </div>
-      )}
-    </span>
-  );
-};
-
-
-const Bubble = () => {
-
-  return     (
-  <div className="box-content w-64 h-32 max-auto flex shadow-2xl">
-      <div className="flex-grow-3 w-3/4 rounded-l-xl p-3 border-y-2 border-l-2 border-slate-600 backdrop-blur-md bg-white bg-opacity-60">
-          <div className="text-xl text-black font-bold">origin</div>
-          <div className="text-slate-500 text-base">n. 起源，源頭;起因</div>
-          <div className="text-slate-500 text-base">n. 出生地</div>
+    <div className="font-normal   font-mono overflow-visible min-w-48 box-content aspect-auto max-auto flex shadow-2xl">
+      <div className="flex-grow-3 w-3/4 rounded-l-xl p-2 border-y border-l border-slate-600 backdrop-blur-md bg-white dark:bg-sky-950 bg-opacity-60">
+        <div className="text-lg text-black dark:text-slate-50 font-bold">{word}</div>
+        <div className="text-slate-500 text-sm">{translationData}</div>
       </div>
       <div className="flex-grow-1 w-1/4">
-          <div className="flex flex-col h-full">
-              <div className="h-1/2 rounded-tr-xl border-2 border-slate-600 flex items-center justify-center backdrop-blur-md bg-white bg-opacity-60 hover:bg-opacity-70">
-              </div>
-              <div className="h-1/2 rounded-br-xl border-x-2 border-b-2 border-slate-600 flex items-center justify-center backdrop-blur-md bg-white bg-opacity-60 hover:bg-opacity-70">
-              </div>
-          </div>
+        <div className="flex flex-col h-full">
+          <div className="h-1/2 rounded-tr-xl border border-slate-600 flex items-center justify-center backdrop-blur-md bg-white dark:bg-sky-950 bg-opacity-60  hover:bg-opacity-70"></div>
+          <div className="h-1/2 rounded-br-xl border-x border-b border-slate-600 flex items-center justify-center backdrop-blur-md bg-white dark:bg-sky-950 bg-opacity-60 hover:bg-opacity-70"></div>
+        </div>
       </div>
-  </div>)
-}
+    </div>
+  );
+};

@@ -31,5 +31,8 @@
       "resources": [ "src/assets/eng_dict.txt", "src/assets/eng_idioms.txt" ],
       "matches": ["<all_urls>"]
     }
+  ],
+  "host_permissions": [
+    "*://*/*"
   ]
 }

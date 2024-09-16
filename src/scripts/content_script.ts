@@ -96,7 +96,7 @@ async function should_highlight_page() {
         return 'unknown error';
     }
 
-    var hostname = response.wdm_hostname;
+    const hostname = response.wdm_hostname;
     if (app_config.black_list.hasOwnProperty(hostname)) {
         return "site in \"Skip List\"";
     }
@@ -113,7 +113,7 @@ async function should_highlight_page() {
     if (!lang_response) {
         return 'unknown error';
     }
-    return lang_response.wdm_iso_language_code == 'en' ? "highlight" : "page language is not English";
+    return lang_response.wdm_iso_language_code === 'en' ? "highlight" : "page language is not English";
 }
 
 
