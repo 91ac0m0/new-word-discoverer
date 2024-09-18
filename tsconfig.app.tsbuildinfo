@@ -1,1 +1,0 @@
-{"root":["./src/component/bubble.tsx","./src/component/highlight.tsx","./src/scripts/config.ts","./src/scripts/content_script.ts","./src/scripts/service_worker.ts"],"errors":true,"version":"5.6.2"}

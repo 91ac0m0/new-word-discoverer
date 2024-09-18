@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { config, get_config, set_config } from '../scripts/config';
 
 let app_config: config;
