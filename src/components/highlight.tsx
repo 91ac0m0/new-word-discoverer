@@ -25,7 +25,7 @@ export function highlight_node(node: Node, tokens: string[], highlight_style: st
 
     let el= (<>{parts.map((part, index) =>
             tokens.includes(part.toLocaleLowerCase())? 
-            (<Highlight_word key={index} part={part} style={highlight_style}></Highlight_word>)
+            (<Highlight_word key={index} part={part} highlight_style={highlight_style}></Highlight_word>)
             :
             part
             )}</>);
@@ -36,18 +36,18 @@ export function highlight_node(node: Node, tokens: string[], highlight_style: st
 
 interface PopupButtonProps {
     part: string;
-    style: style;
+    highlight_style: style;
 }
 
-const Highlight_word: React.FC<PopupButtonProps> = ({ part, style }) => {
+const Highlight_word: React.FC<PopupButtonProps> = ({ part, highlight_style }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const popupRef = useRef<HTMLDivElement | null>(null);
 
     let style_class;
-    if(style.background) {
+    if(highlight_style === style.background) {
         style_class = "bg-orange-200";
-    } else if (style.underline) {
-        style_class = "underline decoration-orange-100";
+    } else if (highlight_style === style.underline) {
+        style_class = "underline decoration-orange-200 decoration-solid";
     } else {
         style_class = "text-amber-500";
     }

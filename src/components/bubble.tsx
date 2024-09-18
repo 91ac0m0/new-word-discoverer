@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 
 async function translation(word: string) {
-  const response = await chrome.runtime.sendMessage({query: 'google_translate', word: word});
-  const translation = response.translate === "" ? "no result" : response.translate;
+  let translation = "no result";
+  let response = await chrome.runtime.sendMessage({query: 'google_translate', word: word});
+  translation === "" ? "no result" : response.translate;
   return translation;
 }
 
 export const Bubble = ({ word, is_open }: {word: string, is_open: boolean}) => {
-  const [translationData, setTranslationData] = useState(null);
+  const [translationData, setTranslationData] = useState("");
 
   useEffect(() => {
     const fetchTranslation = async () => {
@@ -19,7 +20,7 @@ export const Bubble = ({ word, is_open }: {word: string, is_open: boolean}) => {
   }, [is_open]);
 
   if (!translationData) {
-    return <div>Loading...</div>;
+    return <span className="loading loading-dots loading-lg"></span>;
   }
 
   return (

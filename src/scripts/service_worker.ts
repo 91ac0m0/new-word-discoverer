@@ -16,11 +16,11 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
 
 // event handler
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    if (request.wdm_request === "hostname" && sender.tab?.url) {
+    if (request.query === "hostname" && sender.tab?.url) {
         var url = new URL(sender.tab.url);
         var domain = url.hostname;
         sendResponse({wdm_hostname: domain});
-    } else if (request.wdm_request === "page_language" && sender.tab?.id) {
+    } else if (request.query === "page_language" && sender.tab?.id) {
         chrome.tabs.detectLanguage(sender.tab.id, function(iso_language_code) {
             sendResponse({wdm_iso_language_code: iso_language_code});
         });
@@ -51,11 +51,12 @@ chrome.runtime.onMessage.addListener(function (request) {
 
 // not CORS in content script
 chrome.runtime.onMessage.addListener(
-    async function(request, _, sendResponse) {
-        if (request.query === 'google_translate') {
-            const lang = await get_config_lang();
-            // Promise
-            tr(request.word, lang)
+    // you must define the listener as a non-sync function
+    function(request, _, sendResponse) {
+        if (request.query == 'google_translate') {
+            get_config_lang()
+            .then(lang => 
+                tr(request.word, lang)
                 .then(function (result) {
                     console.log(result.translations);
                     const top_5_translate = result.translations.length > 5 ? result.translations.slice(0, 5) : result.translations;
@@ -63,15 +64,15 @@ chrome.runtime.onMessage.addListener(
                     const translate_string = top_5_translate
                         .map(item => item[0])
                         .join("; ")
+                    console.log(translate_string);
                     sendResponse({translate: translate_string});
                 })
                 .catch(function (error) {
                     console.log(error);
                     sendResponse({translate: "network error"});
-                });
-
+                }))
+            return true;
         }
-        return true;
     }
 )
 

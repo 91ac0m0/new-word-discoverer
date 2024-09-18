@@ -20,7 +20,8 @@ function get_root() : boolean {
 function find_highlight_word(node_tokens: string[]) : string[] {
     let word_list = [];
     for(const token of node_tokens) {
-        if(dict.get_index(token) > 3000) {
+        // show a range of words
+        if(dict.get_index(token) > dict.get_size()*app_config.show_range*0.01) {
             word_list.push(token);
         }
     }
@@ -44,7 +45,7 @@ function text_to_highlight_node(node: Node) {
     const word_list = find_highlight_word(node_tokens);
 
     if (word_list.length > 0) {
-        const highlight = highlight_node(node, word_list, app_config.highlight_style.word_hl);
+        const highlight = highlight_node(node, word_list, app_config.word_hl);
         if( highlight === null) {
             return 0;
         }
@@ -90,7 +91,7 @@ function process_html_nodes(el: Node) {
 
 
 async function should_highlight_page() {
-    const response = await chrome.runtime.sendMessage({wdm_request: "hostname"});
+    const response = await chrome.runtime.sendMessage({query: "hostname"});
     if (!response) {
         console.log("unknown error");
         return 'unknown error';
@@ -109,7 +110,7 @@ async function should_highlight_page() {
         return "site is not in \"Favorites List\"";
     }
     
-    const lang_response = await chrome.runtime.sendMessage({wdm_request: "page_language"});
+    const lang_response = await chrome.runtime.sendMessage({query: "page_language"});
     if (!lang_response) {
         return 'unknown error';
     }
@@ -133,5 +134,16 @@ async function init_page() {
     process_html_nodes(document.body);
     nwd_root.render(highlightedElements);
 }
+
+chrome.runtime.onMessage.addListener((request) => {
+    if(request.query === "highlight") {
+        (async () => {
+            dict = await get_dict();
+            process_html_nodes(document.body);
+            nwd_root.render(highlightedElements);
+        })();
+    }
+    return true;
+});
 
 init_page();

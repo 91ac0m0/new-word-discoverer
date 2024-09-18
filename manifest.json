@@ -4,7 +4,7 @@
   "description": "discover new words in web pages",
   "version": "1.0",
   "action": {
-    "default_popup": "popup/popup.html",
+    "default_popup": "src/popup/popup.html",
     "default_icon": "src/assets/fox.png"
   },
   "permissions": [

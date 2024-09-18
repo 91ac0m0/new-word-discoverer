@@ -1,22 +1,15 @@
-
-export interface style {
-    color: boolean,
-    underline: boolean,
-    background: boolean
+export enum style {
+    color,
+    underline,
+    background
 }
 
 export interface config {
     is_enabled: boolean,
     black_list: string[],
     white_list: string[],
-
-    highlight_style: {
-        word_hl: style;
-        idiom_hl: style;
-    };
-
-    show_rank: number,
-
+    word_hl: style;
+    show_range: number,
     lang: string,
 }
 
@@ -26,22 +19,9 @@ const default_config: config = {
     is_enabled: true,
     black_list: [],
     white_list: [],
-
-    highlight_style: {
-        word_hl:  {
-            color: true,
-            underline: false,
-            background: false
-        },
-        idiom_hl:  {
-            color: true,
-            underline: false,
-            background: false
-        }
-    },
-
+    word_hl: style.color,
     lang: "zh",
-    show_rank: 10,
+    show_range: 50,
 }
 
 
@@ -57,4 +37,8 @@ export async function get_config() {
         return default_config;
     }
     return result.nwd_config;
+}
+
+export async function set_config(app_config: config) {
+    await chrome.storage.sync.set({"nwd_config": app_config});
 }
