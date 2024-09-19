@@ -25,10 +25,17 @@ export const HighlightSelector = () => {
 
   return (
     <select 
-    className="w-44 dropdown select select-primary"
+    className="w-36 dropdown select select-primary"
     onChange={handleLanguageChange}
     value={wordStyle}
     >
+      {
+        wordStyle && (
+          <option value={wordStyle} disabled>
+            style: {wordStyle}
+          </option>
+        )
+      }
     {Object.entries(STYLES).map(([key, value]) => (
         <option key={key} value={value}>{value}</option>
     ))}

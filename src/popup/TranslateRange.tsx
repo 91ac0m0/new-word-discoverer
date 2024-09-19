@@ -27,12 +27,12 @@ export const TranslateRange = () =>  {
     <div className="block items-center mt-10">
       <div className="relative">
         <div 
-          className="w-20 p-1 absolute transform -top-8 bg-slate-700 text-white text-xs rounded"
-          style={{ left: `${(range + 1) / 140 * 100}%` }}>
+          className="w-28 p-1 right-2 absolute transform -top-8 bg-slate-700 text-white text-xs rounded"
+          style={{ left: `${(range - 6) / 140 * 100}%` }}>
             <div>
-              词汇比例 {range}
+              show range {range}%
             </div>
-            <svg className="w-4 absolute text-indigo-900 right-8 h-4 top-100" x="0px" y="0px" viewBox="0 0 255 255" xmlSpace="preserve">
+            <svg className="w-4 absolute text-indigo-900 right-12 h-4 top-100" x="0px" y="0px" viewBox="0 0 255 255" xmlSpace="preserve">
                 <polygon className="fill-current" points="0,0 127.5,127.5 255,0"></polygon>
             </svg>
         </div>
@@ -43,13 +43,13 @@ export const TranslateRange = () =>  {
             value={range} onChange={changeRange}
             className="w-5/6 text-indigo-500 range range-xs range-primary"  />
 
-      <div className="mx-7 w-3/4 justify-between text-xs p-2 flex space-x-11">
+      {/* <div className="mx-7 w-3/4 justify-between text-xs p-2 flex space-x-11">
           <span> </span>
           <span>25</span>
           <span>50</span>
           <span>75</span>
           <span> </span>
-      </div>
+      </div> */}
      
     </div>)
 }

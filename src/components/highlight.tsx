@@ -44,7 +44,7 @@ const Highlight_word: React.FC<PopupButtonProps> = ({ part, highlight_style }) =
     const popupRef = useRef<HTMLDivElement | null>(null);
 
     let style_class;
-    if(highlight_style === style.background) {
+    if(highlight_style === style.shadow) {
         style_class = "bg-orange-200";
     } else if (highlight_style === style.underline) {
         style_class = "underline decoration-orange-200 decoration-solid";
@@ -71,7 +71,7 @@ const Highlight_word: React.FC<PopupButtonProps> = ({ part, highlight_style }) =
         {isOpen && (
             <div
             ref={popupRef}
-            className="z-50 absolute -left-4 -button-2 mt-2 transform transition-all duration-300 ease-in-out"
+            className="z-50 absolute left-4 -button-1 mt-2 transform transition-all duration-300 ease-in-out"
             ><Bubble word={part.toLocaleLowerCase()} is_open={isOpen}></Bubble>
             </div>
         )}

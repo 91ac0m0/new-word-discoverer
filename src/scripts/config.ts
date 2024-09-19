@@ -1,7 +1,7 @@
 export enum style {
     color,
     underline,
-    background
+    shadow
 }
 
 export interface config {

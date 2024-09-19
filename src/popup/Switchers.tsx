@@ -31,7 +31,7 @@ export const SwitcherWhiteList = () => {
   }
 
   return (
-    <div className="px-8 py-2 w-full flex items-center">
+    <div className="px-8 py-1.5 w-full flex items-center">
       <label className='flex cursor-pointer select-none items-center'>
         <div className='relative'>
           <input
@@ -52,7 +52,7 @@ export const SwitcherWhiteList = () => {
           ></div>
         </div>
       </label>
-      <span className="text-white text-md inline-flex ml-3">总是翻译该网页</span>
+      <span className="dark:text-white inline-flex ml-3">always highlight this site</span>
       </div>
   )
 }
@@ -84,7 +84,7 @@ export const SwitcherBlackList = () => {
   }
 
   return (
-    <div className="px-8 py-2 w-full flex items-center">
+    <div className="px-8 py-1.5 w-full flex items-center">
       <label className='flex cursor-pointer select-none items-center'>
         <div className='relative'>
           <input
@@ -105,7 +105,7 @@ export const SwitcherBlackList = () => {
           ></div>
         </div>
       </label>
-      <span className="text-white text-md inline-flex ml-3">总是不翻译该网页</span>
+      <span className="dark:text-white inline-flex ml-3">never highlight this site</span>
       </div>
   )
 }
@@ -130,7 +130,7 @@ export const SwitcherAlways = () => {
 
 
   return (
-    <div className="px-8 py-2 w-full flex items-center">
+    <div className="px-8 py-1.5 w-full flex items-center">
       <label className='flex cursor-pointer select-none items-center'>
         <div className='relative'>
           <input
@@ -151,7 +151,7 @@ export const SwitcherAlways = () => {
           ></div>
         </div>
       </label>
-      <span className="text-white text-md inline-flex ml-3">总是翻译所有网页</span>
+      <span className="dark:text-white inline-flex ml-3">always highlight all sites</span>
       </div>
   )
 }

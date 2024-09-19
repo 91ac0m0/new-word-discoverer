@@ -16,8 +16,8 @@ const LANGS:{[key: string]: string} = {
   ca: "Catalan",
   ceb: "Cebuano",
   ny: "Chichewa",
-  zh: "Chinese (Simplified)",
-  "zh-tw": "Chinese (Traditional)",
+  zh: "Chinese Simplified",
+  "zh-tw": "Chinese Traditional",
   co: "Corsican",
   hr: "Croatian",
   cs: "Czech",
@@ -54,7 +54,7 @@ const LANGS:{[key: string]: string} = {
   kk: "Kazakh",
   km: "Khmer",
   ko: "Korean",
-  ku: "Kurdish (Kurmanji)",
+  ku: "Kurdish Kurmanji",
   ky: "Kyrgyz",
   lo: "Lao",
   la: "Latin",
@@ -69,7 +69,7 @@ const LANGS:{[key: string]: string} = {
   mi: "Maori",
   mr: "Marathi",
   mn: "Mongolian",
-  my: "Myanmar (Burmese)",
+  my: "Myanmar Burmese",
   ne: "Nepali",
   no: "Norwegian",
   ps: "Pashto",
@@ -126,6 +126,7 @@ export const LanguageSelector = () => {
     const selectedLang = event.target.value;
     setLang(selectedLang);
     (async () => {
+      console.log(selectedLang);
       app_config.lang = selectedLang;
       await set_config(app_config);
     })();
@@ -133,13 +134,21 @@ export const LanguageSelector = () => {
 
   return (
     <select 
-    className="w-44 dropdown select select-primary"
-    onChange={handleLanguageChange}
-    value={lang}
+      className="w-full dropdown select select-primary line-clamp-1"
+      onChange={handleLanguageChange}
+      value={lang}
     >
-    {Object.entries(LANGS).map(([key, value]) => (
-        <option key={key} value={key}>{value}</option>
-    ))}
-    </select >
+      {lang && (
+        <option value={lang} disabled>
+          to: {LANGS[lang]}
+        </option>
+      )}
+      {Object.entries(LANGS).map(([key, value]) => (
+        <option key={key} value={key}>
+          {value}
+        </option>
+      ))}
+    </select>
   );
+  
 }

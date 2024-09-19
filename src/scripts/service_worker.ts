@@ -1,9 +1,8 @@
 import { set_default_config} from "./config";
 import { load_dictionary, load_idioms } from "./dictionary";
-import { get_config, config} from "./config";
+import { get_config} from "./config";
 import tr from "googletrans";
 
-let app_config: config;
 // on installed 
 chrome.runtime.onInstalled.addListener(({ reason }) => {
     if (reason === 'install') {
@@ -40,9 +39,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 
 chrome.runtime.onMessage.addListener(function (request) {
-    if (request.type === "tts_speak") {
-        if (!!request.word && typeof request.word === "string") {
-            chrome.tts.speak(request.word, {lang: "en", gender: "male"})
+    // only available in service worker...?
+    if (request.query === "tts_speak") {
+        if (request.word && typeof request.word === "string") {
+            chrome.tts.speak(request.word, {'lang': 'en-US', 'rate': 0.75})
         }
     }
 });
@@ -55,14 +55,19 @@ chrome.runtime.onMessage.addListener(
         if (request.query == 'google_translate') {
             get_config_lang()
             .then(lang => 
-                tr(request.word, lang)
+                tr(request.word, {to: lang, from: "en"})
                 .then(function (result) {
                     const top_5_translate = result.translations.length > 5 ? result.translations.slice(0, 5) : result.translations;
-
+                    console.log(lang);
                     const translate_string = top_5_translate
                         .map(item => item[0])
                         .join("; ")
-                    sendResponse({translate: translate_string});
+                    // parse raw to get english pronunciation
+                    let pronunciation_string = ""
+                    if ((result.raw as any)?.[0]?.[1]?.[3] !== undefined) {
+                        pronunciation_string = (result.raw as any)?.[0]?.[1]?.[3];
+                    }
+                    sendResponse({translate: translate_string, pronunciation: pronunciation_string});
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -74,8 +79,6 @@ chrome.runtime.onMessage.addListener(
 )
 
 async function get_config_lang() {
-    if(app_config === undefined) {
-        app_config = await get_config();
-    }
+    const app_config = await get_config();
     return app_config.lang;
 }

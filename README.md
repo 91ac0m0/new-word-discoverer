@@ -7,9 +7,10 @@
     - [x] 选择高亮的样式
     - [x] 高亮本页
 - [x] 增加 white black list 逻辑
-- [ ] 多语言支持
+- [x] 切换 dark light 样式
+- [ ] FIX port problem in crxjs 
+- [ ] FIX 有些页面导航栏显示不出来 比如说 https://react.i18next.com
 - [ ] 词语收藏和删除接口
-- [ ] 选择 dark light 样式
 - [ ] 添加自定义的词库
 - [ ] 在 new tab 随机显示收藏的词语
 - [ ] 要不要把数据移动到 service worker...
