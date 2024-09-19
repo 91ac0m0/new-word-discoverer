@@ -32,7 +32,7 @@ export const HighlightSelector = () => {
       {
         wordStyle && (
           <option value={wordStyle} disabled>
-            style: {wordStyle}
+            Style: {wordStyle}
           </option>
         )
       }

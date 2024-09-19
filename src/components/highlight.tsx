@@ -45,11 +45,11 @@ const Highlight_word: React.FC<PopupButtonProps> = ({ part, highlight_style }) =
 
     let style_class;
     if(highlight_style === style.shadow) {
-        style_class = "bg-orange-200";
+        style_class = "bg-indigo-400";
     } else if (highlight_style === style.underline) {
-        style_class = "underline decoration-orange-200 decoration-solid";
+        style_class = "underline decoration-indigo-400 underline-offset-2 decoration-solid decoration-2";
     } else {
-        style_class = "text-amber-500";
+        style_class = "text-indigo-400";
     }
 
     useEffect(() => {

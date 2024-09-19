@@ -140,7 +140,7 @@ export const LanguageSelector = () => {
     >
       {lang && (
         <option value={lang} disabled>
-          to: {LANGS[lang]}
+          To: {LANGS[lang]}
         </option>
       )}
       {Object.entries(LANGS).map(([key, value]) => (

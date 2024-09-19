@@ -12,6 +12,6 @@ export function HighlightButton() {
     return (<div className=" text-white">
             <button 
             className="w-24 py-2 btn btn-outline btn-primary"
-            onClick={highlightPage}>highlight</button>
+            onClick={highlightPage}>Highlight</button>
         </div>)
 }

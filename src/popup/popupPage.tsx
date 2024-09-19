@@ -14,7 +14,7 @@ export default function Page() {
             <div className="flex flex-row space-x-4 m-4">
                 <LanguageSelector></LanguageSelector>
             </div>
-            <div className="text-sm subpixel-antialiased font-sans font-medium">
+            <div className="m-4 text-sm subpixel-antialiased font-sans font-medium">
                 <SwitcherAlways></SwitcherAlways>
                 <SwitcherWhiteList></SwitcherWhiteList>
                 <SwitcherBlackList></SwitcherBlackList>

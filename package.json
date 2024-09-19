@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "predev": "tailwindcss build -i src/ts.css -o src/index.css",
+    "prebuild": "tailwindcss build -i src/ts.css -o src/index.css",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",

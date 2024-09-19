@@ -2765,11 +2765,6 @@ input.tab:checked + .tab-content,
   background-color: rgb(129 140 248 / var(--tw-bg-opacity));
 }
 
-.bg-orange-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 215 170 / var(--tw-bg-opacity));
-}
-
 .bg-slate-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(51 65 85 / var(--tw-bg-opacity));
@@ -2813,11 +2808,6 @@ input.tab:checked + .tab-content,
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-}
-
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 
 .py-1\.5 {
@@ -2887,11 +2877,6 @@ input.tab:checked + .tab-content,
   letter-spacing: 0.05em;
 }
 
-.text-amber-500 {
-  --tw-text-opacity: 1;
-  color: rgb(245 158 11 / var(--tw-text-opacity));
-}
-
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
@@ -2926,12 +2911,20 @@ input.tab:checked + .tab-content,
   text-decoration-line: underline;
 }
 
-.decoration-orange-200 {
-  text-decoration-color: #fed7aa;
+.decoration-indigo-400 {
+  text-decoration-color: #818cf8;
 }
 
 .decoration-solid {
   text-decoration-style: solid;
+}
+
+.decoration-2 {
+  text-decoration-thickness: 2px;
+}
+
+.underline-offset-2 {
+  text-underline-offset: 2px;
 }
 
 .subpixel-antialiased {
