@@ -2,7 +2,10 @@ export function HighlightButton() {
 
     function highlightPage() {
         (async() => {
-            await chrome.runtime.sendMessage({query: 'highlight'});
+            const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+            if (tab.id){
+                await chrome.tabs.sendMessage(tab.id, {query: "highlight"});
+            }
         })()
     }
 

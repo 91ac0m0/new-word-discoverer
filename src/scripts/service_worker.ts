@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.query === "hostname" && sender.tab?.url) {
         var url = new URL(sender.tab.url);
         var domain = url.hostname;
-        sendResponse({wdm_hostname: domain});
+        sendResponse({hostname: domain});
     } else if (request.query === "page_language" && sender.tab?.id) {
         chrome.tabs.detectLanguage(sender.tab.id, function(iso_language_code) {
             sendResponse({wdm_iso_language_code: iso_language_code});
@@ -34,9 +34,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     } else if (request.wdm_new_tab_url) {
         var fullUrl = request.wdm_new_tab_url;
         chrome.tabs.create({'url': fullUrl}, function () { });
-    } else{
-
     }
+    return true;
 });
 
 
@@ -58,13 +57,11 @@ chrome.runtime.onMessage.addListener(
             .then(lang => 
                 tr(request.word, lang)
                 .then(function (result) {
-                    console.log(result.translations);
                     const top_5_translate = result.translations.length > 5 ? result.translations.slice(0, 5) : result.translations;
 
                     const translate_string = top_5_translate
                         .map(item => item[0])
                         .join("; ")
-                    console.log(translate_string);
                     sendResponse({translate: translate_string});
                 })
                 .catch(function (error) {

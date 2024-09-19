@@ -13,7 +13,6 @@ export const SwitcherWhiteList = () => {
       const tabs = await chrome.tabs.query({currentWindow: true, active: true});
       const url = new URL(tabs[0].url!)
       hostname = url.hostname;
-      console.log(hostname)
       setIsChecked(app_config.white_list.includes(hostname));
     })()
   }, [])
@@ -25,7 +24,9 @@ export const SwitcherWhiteList = () => {
     } else {
       app_config.white_list.push(hostname);
     }
-    set_config(app_config);
+    (async () => {
+      set_config(app_config);
+    })();
     setIsChecked(!isChecked)
   }
 
@@ -65,7 +66,6 @@ export const SwitcherBlackList = () => {
       const tabs = await chrome.tabs.query({currentWindow: true, active: true});
       const url = new URL(tabs[0].url!)
       hostname = url.hostname;
-      console.log(hostname)
       setIsChecked(app_config.black_list.includes(hostname));
     })()
   }, [])
@@ -77,7 +77,9 @@ export const SwitcherBlackList = () => {
     } else {
       app_config.black_list.push(hostname);
     }
-    set_config(app_config);
+    (async () => {
+      set_config(app_config);
+    })();
     setIsChecked(!isChecked)
   }
 
@@ -120,7 +122,9 @@ export const SwitcherAlways = () => {
 
   function handleCheckboxChange() {
     app_config.is_enabled = !app_config.is_enabled;
-    set_config(app_config);
+    (async () => {
+      set_config(app_config);
+    })();
     setIsChecked(!isChecked)
   }
 

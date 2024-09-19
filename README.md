@@ -6,9 +6,9 @@
     - [x] 比例和 list
     - [x] 选择高亮的样式
     - [x] 高亮本页
-- [ ] 增加 white black list 逻辑
-- [ ] 词语收藏和删除接口
+- [x] 增加 white black list 逻辑
 - [ ] 多语言支持
+- [ ] 词语收藏和删除接口
 - [ ] 选择 dark light 样式
 - [ ] 添加自定义的词库
 - [ ] 在 new tab 随机显示收藏的词语

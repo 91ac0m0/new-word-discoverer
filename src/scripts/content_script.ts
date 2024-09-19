@@ -93,16 +93,15 @@ function process_html_nodes(el: Node) {
 async function should_highlight_page() {
     const response = await chrome.runtime.sendMessage({query: "hostname"});
     if (!response) {
-        console.log("unknown error");
         return 'unknown error';
     }
 
-    const hostname = response.wdm_hostname;
-    if (app_config.black_list.hasOwnProperty(hostname)) {
+    const hostname = response.hostname;
+    if (app_config.black_list.includes(hostname)) {
         return "site in \"Skip List\"";
     }
 
-    if (app_config.white_list.hasOwnProperty(hostname)) {
+    if (app_config.white_list.includes(hostname)) {
         return "highlight";
     }
 
@@ -124,7 +123,7 @@ async function init_page() {
     }
 
     app_config = await get_config();
-    let highlight_status = await should_highlight_page();
+    const highlight_status = await should_highlight_page();
     
     if(highlight_status !== "highlight") {
         return;
@@ -143,7 +142,6 @@ chrome.runtime.onMessage.addListener((request) => {
             nwd_root.render(highlightedElements);
         })();
     }
-    return true;
 });
 
 init_page();
