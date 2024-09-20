@@ -42,7 +42,7 @@ export const SwitcherWhiteList = () => {
           />
           <div
             className={`box block h-4 w-7 rounded-full ${
-              isChecked ? 'bg-indigo-400' : 'bg-slate-700'
+              isChecked ? 'dark:bg-indigo-400 bg-primary' : 'dark:bg-slate-700 bg-slate-400'
             }`}
           ></div>
           <div
@@ -52,7 +52,7 @@ export const SwitcherWhiteList = () => {
           ></div>
         </div>
       </label>
-      <span className="dark:text-white inline-flex ml-3">Highlight on this site only</span>
+      <span className="dark:text-white inline-flex ml-3">Always enable on this site</span>
       </div>
   )
 }
@@ -95,7 +95,7 @@ export const SwitcherBlackList = () => {
           />
           <div
             className={`box block h-4 w-7 rounded-full ${
-              isChecked ? 'bg-indigo-400' : 'bg-slate-700'
+              isChecked ? 'dark:bg-indigo-400 bg-primary' : 'dark:bg-slate-700 bg-slate-400'
             }`}
           ></div>
           <div
@@ -105,7 +105,7 @@ export const SwitcherBlackList = () => {
           ></div>
         </div>
       </label>
-      <span className="dark:text-white inline-flex ml-3">Disable highlight on this site</span>
+      <span className="dark:text-white inline-flex ml-3">Disable on this site</span>
       </div>
   )
 }
@@ -141,7 +141,7 @@ export const SwitcherAlways = () => {
           />
           <div
             className={`box block h-4 w-7 rounded-full ${
-              isChecked ? 'bg-indigo-400' : 'bg-slate-700'
+              isChecked ? 'dark:bg-indigo-400 bg-primary' : 'dark:bg-slate-700 bg-slate-400'
             }`}
           ></div>
           <div
@@ -151,7 +151,7 @@ export const SwitcherAlways = () => {
           ></div>
         </div>
       </label>
-      <span className="dark:text-white inline-flex ml-3">Highlight on all sites</span>
+      <span className="dark:text-white inline-flex ml-3">Enable on all sites</span>
       </div>
   )
 }

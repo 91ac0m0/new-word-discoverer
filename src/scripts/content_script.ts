@@ -6,10 +6,11 @@ import '../index.css';
 
 let app_config: config;
 let dict: dictionary;
-const good_tags_list = ["P", "H1", "H2", "H3", "H4", "H5", "H6", "B", "SMALL", "STRONG", "Q", "DIV", "SPAN"];
 let highlight_count = 0;
 let nwd_root: Root;
 let highlightedElements: React.ReactPortal[] = [];
+let highlighted: boolean = false;
+const good_tags_list = ["P", "H1", "H2", "H3", "H4", "H5", "H6", "B", "SMALL", "STRONG", "Q", "DIV", "SPAN"];
 
 function get_root() : boolean {
     nwd_root = createRoot(document.createElement('nwd_root'));
@@ -17,7 +18,7 @@ function get_root() : boolean {
 }
 
 
-function find_highlight_word(node_tokens: string[]) : string[] {
+function find_highlight_word(node_tokens: string[]) {
     let word_list = [];
     for(const token of node_tokens) {
         // show a range of words
@@ -129,6 +130,7 @@ async function init_page() {
         return;
     }
 
+    highlighted = true;
     dict = await get_dict();
     process_html_nodes(document.body);
     nwd_root.render(highlightedElements);
@@ -136,11 +138,13 @@ async function init_page() {
 
 chrome.runtime.onMessage.addListener((request) => {
     if(request.query === "highlight") {
-        (async () => {
-            dict = await get_dict();
-            process_html_nodes(document.body);
-            nwd_root.render(highlightedElements);
-        })();
+        if(!highlighted) {
+            (async () => {
+                dict = await get_dict();
+                process_html_nodes(document.body);
+                nwd_root.render(highlightedElements);
+            })();
+        }
     }
 });
 

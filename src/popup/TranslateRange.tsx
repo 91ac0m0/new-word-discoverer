@@ -27,12 +27,12 @@ export const TranslateRange = () =>  {
     <div className="block items-center mt-10">
       <div className="relative">
         <div 
-          className="w-28 p-1 right-2 absolute transform -top-8 bg-slate-700 text-white text-xs rounded"
+          className="w-28 p-1 right-2 absolute transform -top-8 bg-slate-400 dark:bg-slate-700 text-white text-xs rounded"
           style={{ left: `${(range - 6) / 140 * 100}%` }}>
             <div>
               show range {range}%
             </div>
-            <svg className="w-4 absolute text-indigo-900 right-12 h-4 top-100" x="0px" y="0px" viewBox="0 0 255 255" xmlSpace="preserve">
+            <svg className="w-4 absolute text-slate-400 dark:text-slate-700 right-12 h-4 top-100" x="0px" y="0px" viewBox="0 0 255 255" xmlSpace="preserve">
                 <polygon className="fill-current" points="0,0 127.5,127.5 255,0"></polygon>
             </svg>
         </div>

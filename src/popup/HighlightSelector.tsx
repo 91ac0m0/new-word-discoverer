@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { style, get_config, set_config, config } from '../scripts/config';
 
 let app_config: config;
-const STYLES = ["color", "underline", "background"];
+const STYLES = ["color", "underline", "shadow"];
 
 export const HighlightSelector = () => {
   const [wordStyle, setWordStyle] = useState<string>("color");

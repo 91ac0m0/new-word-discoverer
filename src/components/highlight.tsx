@@ -34,12 +34,12 @@ export function highlight_node(node: Node, tokens: string[], highlight_style: st
     return createPortal(el, new_empty_element);
 }
 
-interface PopupButtonProps {
+interface Props {
     part: string;
     highlight_style: style;
 }
 
-const Highlight_word: React.FC<PopupButtonProps> = ({ part, highlight_style }) => {
+const Highlight_word: React.FC<Props> = ({ part, highlight_style }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const popupRef = useRef<HTMLDivElement | null>(null);
 

@@ -29,11 +29,14 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": [ "src/assets/eng_dict.txt", "src/assets/eng_idioms.txt" ],
+      "resources": [ "src/assets/eng_dict.txt" ],
       "matches": ["<all_urls>"]
     }
   ],
   "host_permissions": [
     "*://*/*"
-  ]
+  ],
+  "chrome_url_overrides": {
+    "newtab": "src/newtab/newtab.html"
+  }
 }

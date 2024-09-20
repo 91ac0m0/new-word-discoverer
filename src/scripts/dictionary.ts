@@ -1,5 +1,3 @@
-// chrome.storage.local not saving object methods in proto
-
 export class dictionary {
     entries: [string, [string, boolean ]][] = [];
     index_map: Map<string, number> = new Map();
@@ -34,13 +32,12 @@ export class dictionary {
         }
     }
 
-    get_size() {
+    get_size(): number {
         return this.index_map.size;
     }
 }
 
 
-let idioms: string[] = [];
 let dict: dictionary = new dictionary();
 
 export async function get_dict() : Promise<dictionary> {
@@ -49,18 +46,8 @@ export async function get_dict() : Promise<dictionary> {
         load_dictionary();
         return dict;
     }
-    let result1 = new dictionary(result.nwd_dict[0], result.nwd_dict[1]);
-    return result1;
-}
-
-
-export async function get_idiom() {
-    const result = await chrome.storage.local.get(['nwd_idiom']);
-    if(result.nwd_idiom === undefined) {
-        load_idioms();
-        return idioms;
-    }
-    return result.nwd_idiom;
+    let result_dict = new dictionary(result.nwd_dict[0], result.nwd_dict[1]);
+    return result_dict;
 }
 
 
@@ -81,19 +68,6 @@ async function load_text(fila_url: string) {
 }
 
 
-export async function load_idioms() {
-    const file_text = await load_text("src/assets/eng_idioms.txt");
-    const lines = file_text.split('\n');
-
-    for (const line of lines) {
-        const fields = line.split('\t');
-        idioms.push(fields[0]);
-        idioms.push(fields[1]);
-    }
-    await chrome.storage.local.set({"nwd_idioms": idioms});
-}
-
-
 export async function load_dictionary(){
     const file_text = await load_text("src/assets/eng_dict.txt");
     const lines = file_text.split('\n');
@@ -111,4 +85,23 @@ export async function load_dictionary(){
         "nwd_dict": [dict.entries, Array.from(dict.index_map)]
     });
     return rank;
+}
+
+export async function get_star_dict() {
+    const result = await chrome.storage.local.get(['nwd_star_dict']);
+    if(result.nwd_star_dict === undefined) {
+        await chrome.storage.local.set({
+            "nwd_star_dict": []
+        });
+        return [];
+    }
+    let result_dict = result.nwd_star_dict;
+    return result_dict;
+}
+
+
+export async function set_star_dict(star_dict: string[]) {
+    await chrome.storage.local.set({
+        "nwd_star_dict": star_dict
+    });
 }
