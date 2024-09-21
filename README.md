@@ -10,7 +10,7 @@
 - [x] 切换 dark light 样式
 - [x] 词语收藏和删除接口
 - [x] 在 new tab 随机显示收藏的词语
-- [ ] 手动 dark mode 切换 https://tailwind.docs.73zls.com/docs/dark-mode
+- [x] 手动 dark mode 切换 https://tailwind.docs.73zls.com/docs/dark-mode
 - [ ] FIX 有些页面导航栏显示不出来 比如说 https://react.i18next.com
 - [ ] 添加自定义的词库
 

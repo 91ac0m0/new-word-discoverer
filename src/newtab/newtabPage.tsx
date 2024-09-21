@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { WordCard } from "./WordCard";
+import { get_config } from "../scripts/config";
 
 export default function Page() {
     const [word, setWord] = useState("");
@@ -10,6 +11,14 @@ export default function Page() {
     }
 
     useEffect(() => {
+        (async() => {
+            const app_config = await get_config();
+            if (app_config.dark){
+                document.querySelector('html')?.classList.add('dark');
+              } else {
+                document.querySelector('html')?.classList.remove('dark');
+            }
+        })();
         get_rand_word();
     }, []);
 

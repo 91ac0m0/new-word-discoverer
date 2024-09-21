@@ -126,7 +126,6 @@ export const LanguageSelector = () => {
     const selectedLang = event.target.value;
     setLang(selectedLang);
     (async () => {
-      console.log(selectedLang);
       app_config.lang = selectedLang;
       await set_config(app_config);
     })();
@@ -134,7 +133,7 @@ export const LanguageSelector = () => {
 
   return (
     <select 
-      className="w-full dropdown select select-primary line-clamp-1"
+      className="w-full dropdown select select-primary line-clamp-1 dark:bg-d-background dark:text-white"
       onChange={handleLanguageChange}
       value={lang}
     >

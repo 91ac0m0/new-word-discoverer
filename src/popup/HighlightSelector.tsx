@@ -25,7 +25,7 @@ export const HighlightSelector = () => {
 
   return (
     <select 
-    className="w-36 dropdown select select-primary"
+    className="w-36 dropdown select select-primary dark:bg-d-background dark:text-white"
     onChange={handleLanguageChange}
     value={wordStyle}
     >

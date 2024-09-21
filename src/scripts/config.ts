@@ -11,17 +11,18 @@ export interface config {
     word_hl: style;
     show_range: number,
     lang: string,
+    dark: boolean;
 }
 
 
 const default_config: config = {
-
     is_enabled: true,
     black_list: [],
     white_list: [],
     word_hl: style.color,
     lang: "zh",
     show_range: 50,
+    dark: false,
 }
 
 

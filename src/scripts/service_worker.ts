@@ -33,7 +33,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             tr(request.word, {to: lang, from: "en"})
             .then(function (result) {
                 const top_5_translate = result.translations.length > 5 ? result.translations.slice(0, 5) : result.translations;
-                console.log(lang);
                 const translate_string = top_5_translate
                     .map(item => item[0])
                     .join("; ")
@@ -61,7 +60,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     } else if (request.query === 'rand_word') {
         (async() => {
             const word = await rand_word();
-            console.log(word);
             sendResponse({rand_word: word});
         })();
     }

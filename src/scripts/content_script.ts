@@ -46,7 +46,7 @@ function text_to_highlight_node(node: Node) {
     const word_list = find_highlight_word(node_tokens);
 
     if (word_list.length > 0) {
-        const highlight = highlight_node(node, word_list, app_config.word_hl);
+        const highlight = highlight_node(node, word_list, app_config.word_hl, app_config.dark);
         if( highlight === null) {
             return 0;
         }

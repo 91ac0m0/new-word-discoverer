@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Bubble } from "./bubble";
 
 
-export function highlight_node(node: Node, tokens: string[], highlight_style: style) {
+export function highlight_node(node: Node, tokens: string[], highlight_style: style, dark: boolean) {
     const parent_node = node.parentElement;
     if (!parent_node || !(parent_node instanceof HTMLElement )) {
         return null;
@@ -25,7 +25,7 @@ export function highlight_node(node: Node, tokens: string[], highlight_style: st
 
     let el= (<>{parts.map((part, index) =>
             tokens.includes(part.toLocaleLowerCase())? 
-            (<Highlight_word key={index} part={part} highlight_style={highlight_style}></Highlight_word>)
+            (<Highlight_word key={index} part={part} highlight_style={highlight_style} dark={dark}></Highlight_word>)
             :
             part
             )}</>);
@@ -37,9 +37,10 @@ export function highlight_node(node: Node, tokens: string[], highlight_style: st
 interface Props {
     part: string;
     highlight_style: style;
+    dark: boolean
 }
 
-const Highlight_word: React.FC<Props> = ({ part, highlight_style }) => {
+const Highlight_word: React.FC<Props> = ({ part, highlight_style, dark }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const popupRef = useRef<HTMLDivElement | null>(null);
 
@@ -50,6 +51,11 @@ const Highlight_word: React.FC<Props> = ({ part, highlight_style }) => {
         style_class = "underline decoration-indigo-400 underline-offset-2 decoration-solid decoration-2";
     } else {
         style_class = "text-indigo-400";
+    }
+
+    let dark_style = "relative";
+    if (dark) {
+        dark_style += " dark";
     }
 
     useEffect(() => {
@@ -66,7 +72,7 @@ const Highlight_word: React.FC<Props> = ({ part, highlight_style }) => {
     }, []);
 
     return (
-        <span className="relative">
+        <span className={dark_style}>
         <span className={style_class} onClick={() => setIsOpen(!isOpen)} >{part}</span>
         {isOpen && (
             <div
