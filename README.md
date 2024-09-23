@@ -1,32 +1,48 @@
+# NEW WORD DISCOVERER
+
+NEW WORD DISCOVERER is inspired by [word-discoverer](https://github.com/mechatroner/word-discoverer). Main purpose of this project is to improve reading experience for non-native speakers. 
+
+According to some observations reading behavior of native and non-native speakers can differ. Also native speakers have a higher probability to spot an unknown word or idiom in text they read. To help users spot new words and increase their vocabulary, rare words in text can be highlighted.
+
+## Install
+
+download from release or
+
+```
+npm install && npm run build
+```
+
+Go to Chrome Settings using three dots on the top right corner. Then Select Extensions. Click on Load Unpacked and select `dist` folder. Note: You need to select the folder in which the manifest file exists.
+
+NOTE: in vivaldi, set [new-tab-behavior-via-extensions](https://vivaldi.com/blog/new-tab-behavior-via-extensions/)
+
+## Usage
+
+Highlight and collect new words in English articles
+
+![Highlight and collect new words](images/image_1.png)
+
+Settings can be made on the popup page
+
+![change setting](image/image_2.png)
+
+review collected words in new tab page
+
+![new tab](image/image_3.png)
+
 ## TODO
 
-- [x] 翻译接口
-- [x] popup 面板，可以进行 highlight style、显示比例的修改
-    - [x] 选择语言
-    - [x] 比例和 list
-    - [x] 选择高亮的样式
-    - [x] 高亮本页
-- [x] 增加 white black list 逻辑
-- [x] 切换 dark light 样式
-- [x] 词语收藏和删除接口
-- [x] 在 new tab 随机显示收藏的词语
-- [x] 手动 dark mode 切换 https://tailwind.docs.73zls.com/docs/dark-mode
-- [ ] FIX 有些页面导航栏显示不出来 比如说 https://react.i18next.com
-- [ ] 添加自定义的词库
-
-https://github.com/crimx/ext-saladict/blob/ffb478cd2e3277a40edeb9470ad1c6614b010028/src/components/dictionaries/google/engine.ts#L26
-
-写一个函数负责从 google 翻译拿结果
-word lang
-word_translate
-
-star_list
-delete_list & 从列表里面删除
-
-popup 面板修改 config
-
-## 相关
-https://crxjs.dev/vite-plugin
-https://github.com/DarinRowe/googletrans
-https://tw-elements.com/docs/standard/getting-started/quick-start/
-vivaldi setting: https://vivaldi.com/blog/new-tab-behavior-via-extensions/
+- [x] translate api
+- [x] popup page
+    - [x] select language
+    - [x] show range
+    - [x] highlight style
+    - [x] highlight this page
+- [x] add url in white list or black list
+- [x] dark mode
+- [x] collect words
+- [x] show a random word in new tab
+- [ ] FIX google no result...
+- [ ] change tts
+- [ ] FIX page display error in some website
+- [ ] customize dictionary
