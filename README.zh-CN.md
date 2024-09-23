@@ -20,15 +20,15 @@ npm install && npm run build
 
 高亮的单词可以收藏
 
-![Highlight and collect new words](images/image_1.png)
+![Highlight and collect new words](images/highlight.png)
 
 点击扩展图标可以进行一些设置
 
-![change setting](image/image_2.png)
+![change setting](images/setting.png)
 
 在 new tab 页面可以随机出现一个之前的单词
 
-![new tab](image/image_3.png)
+![new tab](images/newtab.png)
 
 ## TODO
 

@@ -20,15 +20,15 @@ NOTE: in vivaldi, set [new-tab-behavior-via-extensions](https://vivaldi.com/blog
 
 Highlight and collect new words in English articles
 
-![Highlight and collect new words](images/image_1.png)
+![Highlight and collect new words](images/highlight.png)
 
 Settings can be made on the popup page
 
-![change setting](image/image_2.png)
+![change setting](images/setting.png)
 
 review collected words in new tab page
 
-![new tab](image/image_3.png)
+![new tab](images/newtab.png)
 
 ## TODO
 
